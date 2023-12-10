@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalDataServices } from '../../services/localData.ts.service';
 
 @Component({
   selector: 'app-TodoTable',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoTableComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private LocalDataServices : LocalDataServices
+  ) { }
 
   ngOnInit() {
-  }
 
+
+
+  }
+check = () =>{
+console.log("click")
+}
 }
