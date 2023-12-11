@@ -1,5 +1,6 @@
+import { ApiServicesService } from './../../services/api-services.service';
 import { Component, OnInit } from '@angular/core';
-import { LocalDataServices } from '../../services/localData.ts.service';
+
 
 @Component({
   selector: 'app-TodoTable',
@@ -7,17 +8,30 @@ import { LocalDataServices } from '../../services/localData.ts.service';
   styleUrls: ['./TodoTable.component.css']
 })
 export class TodoTableComponent implements OnInit {
-
-  constructor(
-    private LocalDataServices : LocalDataServices
-  ) { }
+data : any[] = []
+  constructor(private _ApiServicesService: ApiServicesService
+  ) {
+    this.getTodoList()  }
 
   ngOnInit() {
 
 
 
+
   }
-check = () =>{
-console.log("click")
-}
+  searchTodo(event:any){
+    console.log(event.target.value)
+    const param = event.target.value
+    this._ApiServicesService.searchTodo(param)
+    .subscribe
+    ((x: any) =>
+    {console.log(x)})
+  }
+  getTodoList(): void {
+    this._ApiServicesService.getTodoList()
+      .subscribe((x: any) => {
+        this.data = x;
+        console.log(this.data)
+      });
+  }
 }
