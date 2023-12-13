@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TodoTableComponent } from './TodoTable.component';
 import { FormsModule } from '@angular/forms';
 
 
@@ -12,6 +11,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [],
-  declarations: [TodoTableComponent]
+  declarations: []
 })
 export class TodoTableModule { }

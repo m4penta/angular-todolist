@@ -1,24 +1,25 @@
-
-<input type="text" (change)="searchTodo($event)">
-
+<input type="search" (change)="searchTodo($event)">
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">date</th>
-      <th scope="col"> title</th>
-      <th scope="col">description</th>
-      <th scope="col"> is_complete</th>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Is Complete</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>
-
-      </th>
-      <th>1</th>
-      <th>1</th>
-    </tr>
+  <tr *ngFor="let item of data">
+    <td>{{item.id}}</td>
+    <td>{{item.title}}</td>
+    <td>{{item.description}}</td>
+    <td>{{item.is_complete}}</td>
+    <td>
+      <button mat-button color="warn" (click)="deleteTodo(item.id)">Xóa</button>
+       <button mat-button color="primary">Sửa</button>
+    </td>
+  </tr>
   </tbody>
 </table>
-
