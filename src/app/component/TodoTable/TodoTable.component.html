@@ -1,4 +1,20 @@
-<input type="search" (change)="searchTodo($event)">
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <button class="btn btn-outline-secondary" type="button">Button</button>
+    </div>
+    <input type="text" class="form-control" (change)="searchTodo($event)" placeholder="Tìm kiếm công việc" aria-label="" aria-describedby="basic-addon1">
+  </div>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-primary">Tạo thêm công việc</button>
+    </div>
+  </div>
+</div>
+
 
 <table class="table">
   <thead>

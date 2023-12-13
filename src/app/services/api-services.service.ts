@@ -19,7 +19,7 @@ export class ApiServicesService {
 
     return this._http.get(`${this.apiUrl}?q=${title}`)
   }
-  DeleteTodo(id: string){
+  DeleteTodo(id: any){
 
     return this._http.delete(`${this.apiUrl}/${id}`)
   }

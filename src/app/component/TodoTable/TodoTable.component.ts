@@ -40,7 +40,10 @@ export class TodoTableComponent implements OnInit {
     this._ApiServicesService.searchTodo(param)
     .subscribe
     ((x: any) =>
-    {console.log(x)})
+    {
+      this.data = x
+      console.log(x)
+    })
   }
   getTodoList(): void {
     this._ApiServicesService.getTodoList()
@@ -51,8 +54,12 @@ export class TodoTableComponent implements OnInit {
   }
   deleteTodo(id: string): void {
     console.log(id)
-    if(id){
-      this._ApiServicesService.DeleteTodo(id)
+    if(typeof(id) == "number"){
+      this._ApiServicesService.DeleteTodo(id).subscribe(response => {
+      console.log('Todo deleted:', response);
+      this.getTodoList()
+    });
     }
+
   }
 }
