@@ -1,7 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
+  standalone: true,
   selector: 'app-homeGrid',
   templateUrl: './homeGrid.component.html',
   styleUrls: ['./homeGrid.component.css']
