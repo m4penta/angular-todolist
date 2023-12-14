@@ -1,11 +1,13 @@
 
 import { CommonModule, NgFor, NgForOf } from '@angular/common';
 import { ApiServicesService } from './../../services/api-services.service';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormsModule, NgModel } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
+import { Todo } from '../../models/todo';
+import { ModalService } from '../../services/modal.service';
 @Component({
   selector: 'app-TodoTable',
   standalone: true,
@@ -16,7 +18,7 @@ import {MatButtonModule} from '@angular/material/button';
     FormsModule,
     MatButtonModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './TodoTable.component.html',
   styleUrls: ['./TodoTable.component.css'],
@@ -24,7 +26,15 @@ import {MatButtonModule} from '@angular/material/button';
 export class TodoTableComponent implements OnInit {
   displayedColumns: string[] = ['date', 'Title', 'description', 'is_complete'];
   data : any[]= []
-  constructor(private _ApiServicesService: ApiServicesService
+  model : Todo = new Todo({
+    id: '',
+    title: '',
+    description:'',
+    is_complete: false,
+  })
+  constructor(
+    private _ApiServicesService: ApiServicesService,
+    private modalService: ModalService
   ) {
     this.getTodoList()  }
 
@@ -52,14 +62,15 @@ export class TodoTableComponent implements OnInit {
         console.log(this.data)
       });
   }
+  create(): void{
+    console.log(this.model)
+    this.modalService.close('createModal')
+  }
   deleteTodo(id: string): void {
-    console.log(id)
-    if(typeof(id) == "number"){
       this._ApiServicesService.DeleteTodo(id).subscribe(response => {
       console.log('Todo deleted:', response);
       this.getTodoList()
     });
-    }
 
   }
 }

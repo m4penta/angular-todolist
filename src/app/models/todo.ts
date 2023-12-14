@@ -1,5 +1,4 @@
 export class Todo {
-  date?: Date;
   title? : string;
   id? :string;
   description?: string;
