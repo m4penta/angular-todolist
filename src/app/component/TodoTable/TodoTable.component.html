@@ -31,7 +31,7 @@
     <td>{{item.id}}</td>
     <td>{{item.title}}</td>
     <td>{{item.description}}</td>
-    <td>{{item.is_complete}}</td>
+    <td><input type="checkbox" [(ngModel)]="item.is_complete" (change) ="Status(item.id, item.is_complete)"></td>
     <td>
       <button mat-button color="warn" (click)="deleteTodo(item.id)">Xóa</button>
 
