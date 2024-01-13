@@ -71,12 +71,6 @@
       "title": "Task 9",
       "description": "Description for Task 3",
       "is_complete": false
-    },
-    {
-      "id": "ads1212jm",
-      "title": "Quét nhà",
-      "description": "lấy chổi quét nhà",
-      "is_complete": false
     }
   ],
   "users": [

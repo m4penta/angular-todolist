@@ -1,11 +1,13 @@
 
 import { CommonModule, NgFor, NgForOf } from '@angular/common';
 import { ApiServicesService } from './../../services/api-services.service';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormsModule, NgModel } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
+import { Todo } from '../../models/todo';
+import { ModalService } from '../../services/modal.service';
 @Component({
   selector: 'app-TodoTable',
   standalone: true,
@@ -16,15 +18,26 @@ import {MatButtonModule} from '@angular/material/button';
     FormsModule,
     MatButtonModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './TodoTable.component.html',
   styleUrls: ['./TodoTable.component.css'],
 })
 export class TodoTableComponent implements OnInit {
+deleteCN : any;
+sendcheckCN :any
+checkCreate: boolean = false;
   displayedColumns: string[] = ['date', 'Title', 'description', 'is_complete'];
   data : any[]= []
-  constructor(private _ApiServicesService: ApiServicesService
+  model : Todo = new Todo({
+    id: '',
+    title: '',
+    description:'',
+    is_complete: false,
+  })
+  constructor(
+    private _ApiServicesService: ApiServicesService,
+    private modalService: ModalService
   ) {
     this.getTodoList()  }
 
@@ -40,7 +53,10 @@ export class TodoTableComponent implements OnInit {
     this._ApiServicesService.searchTodo(param)
     .subscribe
     ((x: any) =>
-    {console.log(x)})
+    {
+      this.data = x
+      console.log(x)
+    })
   }
   getTodoList(): void {
     this._ApiServicesService.getTodoList()
@@ -49,10 +65,16 @@ export class TodoTableComponent implements OnInit {
         console.log(this.data)
       });
   }
+  elementVisible: boolean = true;
+  create(): void{
+    console.log(this.model)
+    this.elementVisible = false;
+  }
   deleteTodo(id: string): void {
-    console.log(id)
-    if(id){
-      this._ApiServicesService.DeleteTodo(id)
-    }
+      this._ApiServicesService.DeleteTodo(id).subscribe(response => {
+      console.log('Todo deleted:', response);
+      this.getTodoList()
+    });
+
   }
 }
