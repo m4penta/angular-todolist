@@ -24,6 +24,9 @@ import { ModalService } from '../../services/modal.service';
   styleUrls: ['./TodoTable.component.css'],
 })
 export class TodoTableComponent implements OnInit {
+deleteCN : any;
+sendcheckCN :any
+checkCreate: boolean = false;
   displayedColumns: string[] = ['date', 'Title', 'description', 'is_complete'];
   data : any[]= []
   model : Todo = new Todo({
@@ -62,9 +65,10 @@ export class TodoTableComponent implements OnInit {
         console.log(this.data)
       });
   }
+  elementVisible: boolean = true;
   create(): void{
     console.log(this.model)
-    this.modalService.close('createModal')
+    this.elementVisible = false;
   }
   deleteTodo(id: string): void {
       this._ApiServicesService.DeleteTodo(id).subscribe(response => {
