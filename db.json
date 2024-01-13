@@ -89,5 +89,35 @@
       "username": "user3",
       "password": "password3"
     }
+  ],
+  "dogs": [
+    {
+      "id": 1,
+      "name": "Buddy",
+      "color": "Brown",
+      "typeId": 1
+    },
+    {
+      "id": 2,
+      "name": "Charlie",
+      "color": "Black",
+      "typeId": 1
+    },
+    {
+      "id": 10,
+      "name": "Molly",
+      "color": "White",
+      "typeId": 2
+    }
+  ],
+  "dogTypes": [
+    {
+      "id": 1,
+      "name": "Chó Tây"
+    },
+    {
+      "id": 2,
+      "name": "Chó Ta"
+    }
   ]
 }
