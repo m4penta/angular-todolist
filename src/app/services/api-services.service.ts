@@ -9,30 +9,39 @@ export class ApiServicesService {
   private apiUrl = 'http://localhost:3000/todo'
   constructor(private _http : HttpClient) { }
 
-  getTodoList(): Observable<any> {
+  get(): Observable<any> {
     console.log(this._http)
     return this._http.get<any>(this.apiUrl);
 
     // Gửi yêu cầu GET đến API
   }
-  searchTodo(title: string){
+  search(title: string){
 
     return this._http.get(`${this.apiUrl}?q=${title}`)
   }
-  DeleteTodo(id: any){
+  Delete(id: any){
 
     return this._http.delete(`${this.apiUrl}/${id}`)
   }
-  createTodo(todoData: any): Observable<any> {
+  create(Data: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    return this._http.post<any>(this.apiUrl, todoData, httpOptions).pipe(
+    return this._http.post<any>(this.apiUrl, Data, httpOptions).pipe(
       catchError(this.handleError<any>('createTodo'))
     );
   }
+  updateTaskStatus(id: string, status: boolean): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
+    return this._http.patch<any>(`${this.apiUrl}/${id}`, { is_complete: status },httpOptions).pipe(
+      catchError(this.handleError<any>('changeTodoStatus'))
+    );
+
+  }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

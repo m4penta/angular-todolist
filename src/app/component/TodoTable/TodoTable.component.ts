@@ -50,7 +50,7 @@ checkCreate: boolean = false;
   searchTodo(event:any){
     console.log(event.target.value)
     const param = event.target.value
-    this._ApiServicesService.searchTodo(param)
+    this._ApiServicesService.search(param)
     .subscribe
     ((x: any) =>
     {
@@ -59,7 +59,7 @@ checkCreate: boolean = false;
     })
   }
   getTodoList(): void {
-    this._ApiServicesService.getTodoList()
+    this._ApiServicesService.get()
       .subscribe((x: any) => {
         this.data = x;
         console.log(this.data)
@@ -68,13 +68,25 @@ checkCreate: boolean = false;
   elementVisible: boolean = true;
   create(): void{
     console.log(this.model)
-    this.elementVisible = false;
+    this._ApiServicesService.create(this.model).subscribe( ()=>{
+         this.closeModal()
+        this.getTodoList();
+    })
   }
   deleteTodo(id: string): void {
-      this._ApiServicesService.DeleteTodo(id).subscribe(response => {
+      this._ApiServicesService.Delete(id).subscribe(response => {
       console.log('Todo deleted:', response);
       this.getTodoList()
     });
 
+  }
+  Status(id:string, status: boolean): void{
+    this._ApiServicesService.updateTaskStatus(id, status).subscribe(()=>{
+      console.log('change good')
+    })
+
+  }
+  closeModal(): void{
+    this.elementVisible = false
   }
 }
